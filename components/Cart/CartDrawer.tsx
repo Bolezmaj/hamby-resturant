@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store/cartStore';
 import { formatPrice } from '@/lib/utils';
@@ -15,6 +15,21 @@ export default function CartDrawer() {
   const itemCount = items.reduce((s, i) => s + i.quantity, 0);
   const handleClose = () => { closeCart(); setShowCheckout(false); };
 
+  // Zaključaj body scroll kad je drawer otvoren
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -23,7 +38,7 @@ export default function CartDrawer() {
             onClick={handleClose} className="fixed inset-0 z-50 bg-coal/70 backdrop-blur-md" aria-hidden="true" />
 
           <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={springPanel}
-            className="fixed bottom-0 right-0 top-0 z-50 flex w-full max-w-[440px] flex-col bg-coal shadow-[-20px_0_60px_rgba(0,0,0,0.5)]"
+            className="fixed bottom-0 right-0 top-0 z-50 flex w-full max-w-[440px] flex-col bg-coal shadow-[-20px_0_60px_rgba(0,0,0,0.5)] overscroll-contain touch-pan-y"
             role="dialog" aria-modal="true" aria-label="Košarica">
 
             {/* Header */}
