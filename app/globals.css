@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   PIZZA GRILL CAFFE HAMBY — Tailwind v4 Design System
+   ============================================================ */
+
+@theme {
+  /* Boje */
+  --color-ember: #C4380A;
+  --color-ember-light: #E8440A;
+  --color-ember-glow: #FF6B35;
+
+  --color-coal: #0C0A09;
+  --color-coal-light: #1C1917;
+  --color-coal-mid: #292524;
+  --color-coal-soft: #44403C;
+
+  --color-bone: #FAF8F5;
+  --color-bone-dark: #F0EBE3;
+  --color-bone-deep: #E7DFD3;
+
+  --color-ink: #1C1917;
+  --color-ink-soft: #57534E;
+  --color-ink-muted: #A8A29E;
+
+  --color-line: rgba(28, 25, 23, 0.08);
+  --color-line-dark: rgba(255, 255, 255, 0.06);
+
+  --color-gold: #D4AF37;
+  --color-gold-dim: rgba(212, 175, 55, 0.15);
+
+  /* Fontovi */
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+
+  /* Animacije */
+  --animate-spin: spin 1s linear infinite;
+  --animate-pulse-ring: pulse-ring 1.5s ease-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================
+   BAZA
+   ============================================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-ember); border-radius: 99px; }
+* { scrollbar-width: thin; scrollbar-color: var(--color-ember) transparent; }
+
+/* ============================================================
+   FOKUS I SELEKCIJA
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-ember);
+  color: white;
+}
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: var(--color-ember);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
