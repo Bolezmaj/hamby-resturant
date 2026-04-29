@@ -1,58 +1,64 @@
 @import "tailwindcss";
 
 /* ============================================================
-   PIZZA GRILL CAFFE HAMBY — Tailwind v4 Design System
+   PIZZA GRILL CAFFE HAMBY — Design System
    ============================================================ */
 
 @theme {
-  /* Boje */
+  /* Brand boje */
   --color-ember: #C4380A;
   --color-ember-light: #E8440A;
   --color-ember-glow: #FF6B35;
 
+  /* Tamne površine */
   --color-coal: #0C0A09;
-  --color-coal-light: #1C1917;
-  --color-coal-mid: #292524;
-  --color-coal-soft: #44403C;
+  --color-coal-light: #161412;
+  --color-coal-mid: #221E1B;
+  --color-coal-soft: #3A3330;
 
+  /* Tople površine */
   --color-bone: #FAF8F5;
-  --color-bone-dark: #F0EBE3;
-  --color-bone-deep: #E7DFD3;
+  --color-bone-dark: #F2EDE5;
+  --color-bone-deep: #E8E0D4;
 
-  --color-ink: #1C1917;
-  --color-ink-soft: #57534E;
-  --color-ink-muted: #A8A29E;
+  /* Tekst */
+  --color-ink: #1A1614;
+  --color-ink-soft: #5C5249;
+  --color-ink-muted: #9C8E84;
 
-  --color-line: rgba(28, 25, 23, 0.08);
-  --color-line-dark: rgba(255, 255, 255, 0.06);
+  /* Linije */
+  --color-line: rgba(26, 22, 20, 0.07);
+  --color-line-dark: rgba(255, 255, 255, 0.05);
 
-  --color-gold: #D4AF37;
-  --color-gold-dim: rgba(212, 175, 55, 0.15);
+  /* Zlato */
+  --color-gold: #C9A227;
+  --color-gold-light: #E8C547;
 
   /* Fontovi */
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
   --font-body: var(--font-dm-sans), system-ui, sans-serif;
-
-  /* Animacije */
-  --animate-spin: spin 1s linear infinite;
-  --animate-pulse-ring: pulse-ring 1.5s ease-out infinite;
-  --animate-float: float 3s ease-in-out infinite;
 }
 
 /* ============================================================
    BAZA
    ============================================================ */
 
+*, *::before, *::after { box-sizing: border-box; }
+
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background-color: var(--color-bone);
   color: var(--color-ink);
   font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -70,43 +76,32 @@ body {
    FOKUS I SELEKCIJA
    ============================================================ */
 
-:focus-visible {
-  outline: 2px solid var(--color-ember);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-::selection {
-  background: var(--color-ember);
-  color: white;
-}
+:focus-visible { outline: 2px solid var(--color-ember); outline-offset: 3px; border-radius: 3px; }
+::selection { background: var(--color-ember); color: white; }
 
 /* ============================================================
    SKIP LINK
    ============================================================ */
 
 .skip-link {
-  position: absolute;
-  top: -100%;
-  left: 16px;
-  z-index: 9999;
-  padding: 12px 24px;
-  background: var(--color-ember);
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  border-radius: 0 0 8px 8px;
-  transition: top 0.2s;
+  position: absolute; top: -100%; left: 16px; z-index: 9999;
+  padding: 12px 24px; background: var(--color-ember); color: white;
+  font-weight: 600; font-size: 14px; border-radius: 0 0 8px 8px; transition: top 0.2s;
 }
 .skip-link:focus { top: 0; }
+
+/* ============================================================
+   SERIF UTILITY
+   ============================================================ */
+
+.font-serif { font-family: var(--font-serif); }
 
 /* ============================================================
    KEYFRAMES
    ============================================================ */
 
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.2); opacity: 0; } }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
 /* ============================================================
    REDUCED MOTION
